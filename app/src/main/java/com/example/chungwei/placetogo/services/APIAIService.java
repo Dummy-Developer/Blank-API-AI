@@ -5,17 +5,22 @@ import android.content.Context;
 import ai.api.AIListener;
 import ai.api.AIServiceException;
 import ai.api.android.AIConfiguration;
+import ai.api.android.AIDataService;
 import ai.api.android.AIService;
+import ai.api.model.AIRequest;
+import ai.api.model.AIResponse;
 
 public class APIAIService {
 
+    private AIDataService aiDataService;
     private AIService aiService;
 
     public APIAIService(Context context, AIListener listener) {
-        final AIConfiguration config = new AIConfiguration("REPLACE_CLIENT_ACCESS_TOKEN",
+        final AIConfiguration config = new AIConfiguration("d2cbe7f30c97426f8c9646c8a96b382c",
                 AIConfiguration.SupportedLanguages.English,
                 AIConfiguration.RecognitionEngine.System);
 
+        aiDataService = new AIDataService(context, config);
         aiService = AIService.getService(context, config);
         aiService.setListener(listener);
     }
@@ -34,7 +39,9 @@ public class APIAIService {
     }
 
     // Text input
-    public void textRequest(String textRequest) throws AIServiceException {
-        aiService.textRequest(textRequest, null);
+    public AIResponse textRequest(String query) throws AIServiceException {
+        AIRequest request = new AIRequest();
+        request.setQuery(query);
+        return aiDataService.request(request);
     }
 }
