@@ -1,14 +1,15 @@
 package com.example.chungwei.placetogo;
 
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.chungwei.placetogo.services.APIAIService;
+import com.example.chungwei.placetogo.services.foursquare.FoursquareService;
 
 import ai.api.AIListener;
 import ai.api.AIServiceException;
@@ -18,6 +19,7 @@ import ai.api.model.AIResponse;
 public class MainActivity extends AppCompatActivity implements AIListener {
 
     private APIAIService apiaiService;
+    private FoursquareService foursquareService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,9 @@ public class MainActivity extends AppCompatActivity implements AIListener {
         //initialize API.AI service
         apiaiService = new APIAIService(this, this);
 
+        //initialize Foursquare service
+        foursquareService = new FoursquareService(this);
+
         ((Button) findViewById(R.id.button)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -34,7 +39,15 @@ public class MainActivity extends AppCompatActivity implements AIListener {
                 SendRequest(text);
             }
         });
+
+        ((Button) findViewById(R.id.fbutton)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                foursquareService.getVenueRecommendation("");
+            }
+        });
     }
+
 
     private void SendRequest(String text) {
         AsyncTask<String, Void, AIResponse> task = new AsyncTask<String, Void, AIResponse>() {
