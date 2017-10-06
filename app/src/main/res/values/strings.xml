@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">Placetogo</string>
-    
+
     //Main Screen Text/String Declaration
     <string name="navigateText">NAVIGATE</string>
     <string name="feelingLuckyText">FEELING LUCKY</string>
     <string name="aroundMeText">AROUND ME</string>
-    
+
 </resources>

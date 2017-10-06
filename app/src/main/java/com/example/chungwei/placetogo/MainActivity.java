@@ -1,11 +1,11 @@
 package com.example.chungwei.placetogo;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 
 import com.android.volley.VolleyError;
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements AIListener {
         //initialize Foursquare service
         foursquareService = new FoursquareService(this);
 
-        ((Button) findViewById(R.id.button)).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String text = ((EditText) findViewById(R.id.editText)).getText().toString();
@@ -43,13 +43,17 @@ public class MainActivity extends AppCompatActivity implements AIListener {
             }
         });
 
-        ((Button) findViewById(R.id.fbutton)).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.fbutton).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(final View view) {
                 foursquareService.getVenueRecommendation(new IFoursquareResponse<Result>() {
                     @Override
                     public void onResponse(Result result) {
                         Log.i("Result", result.toString());
+
+                        Intent intent = new Intent(view.getContext(), ListActivity.class);
+                        intent.putExtra("result", result.getResponse().getGroups().get(0).getItems());
+                        startActivity(intent);
                     }
 
                     @Override
