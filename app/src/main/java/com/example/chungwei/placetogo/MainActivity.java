@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.android.volley.VolleyError;
-import com.example.chungwei.placetogo.services.APIAIService;
+import com.example.chungwei.placetogo.services.apiai.APIAIService;
 import com.example.chungwei.placetogo.services.foursquare.FoursquareService;
 import com.example.chungwei.placetogo.services.foursquare.IFoursquareResponse;
 import com.example.chungwei.placetogo.services.foursquare.Result;

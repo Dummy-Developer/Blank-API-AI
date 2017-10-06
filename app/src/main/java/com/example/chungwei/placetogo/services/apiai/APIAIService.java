@@ -1,4 +1,4 @@
-package com.example.chungwei.placetogo.services;
+package com.example.chungwei.placetogo.services.apiai;
 
 import android.content.Context;
 
