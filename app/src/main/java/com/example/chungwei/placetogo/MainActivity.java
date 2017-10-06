@@ -8,8 +8,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.android.volley.VolleyError;
 import com.example.chungwei.placetogo.services.APIAIService;
 import com.example.chungwei.placetogo.services.foursquare.FoursquareService;
+import com.example.chungwei.placetogo.services.foursquare.IFoursquareResponse;
+import com.example.chungwei.placetogo.services.foursquare.Result;
 
 import ai.api.AIListener;
 import ai.api.AIServiceException;
@@ -43,7 +46,17 @@ public class MainActivity extends AppCompatActivity implements AIListener {
         ((Button) findViewById(R.id.fbutton)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                foursquareService.getVenueRecommendation("");
+                foursquareService.getVenueRecommendation(new IFoursquareResponse<Result>() {
+                    @Override
+                    public void onResponse(Result result) {
+                        Log.i("Result", result.toString());
+                    }
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.i("Error", "error");
+                    }
+                }, "5.3654,100.461", "", 10);
             }
         });
     }

@@ -1,7 +1,6 @@
 package com.example.chungwei.placetogo.services.foursquare;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -10,46 +9,67 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.lang.reflect.Modifier;
 
 public class FoursquareService {
 
     private Context context;
     private RequestQueue requestQueue;
-    private String client_id = "S0VBO5HFPGFXPEU23HOIOUXNP2IXFAOBRFEU0C0NMGPYNVDO";
-    private String client_secret = "ZN0UHF0F234HLLHIHNGZXBS3IPKP2TSTESI24HUOUNQ212JQ";
+    private final static String client_id = "S0VBO5HFPGFXPEU23HOIOUXNP2IXFAOBRFEU0C0NMGPYNVDO";
+    private final static String client_secret = "ZN0UHF0F234HLLHIHNGZXBS3IPKP2TSTESI24HUOUNQ212JQ";
+    private final static String version = "20170801";
+
+    private Gson gson;
 
     public FoursquareService(Context context) {
         this.context = context;
         requestQueue = Volley.newRequestQueue(context);
+        gson = new GsonBuilder().excludeFieldsWithModifiers(Modifier.PROTECTED).create();
     }
 
-    public void getVenueRecommendation(String query) {
+    public void getVenueRecommendation(final IFoursquareResponse<Result> callback, String ll, String query, int limit) {
+        String url = setupURL("https://api.foursquare.com/v2/venues/explore") +
+                applyParameter("ll", ll) +
+                applyParameter("near", ll == null ? "Penang, Malaysia" : "") +
+                applyParameter("query", query) +
+                applyParameter("limit", String.valueOf(limit));
+
         StringRequest request = new StringRequest(
                 Request.Method.GET,
-                setupDeveloperKey("https://api.foursquare.com/v2/venues/explore") +
-                        String.format("&ll=40.7243,-74.0018&query=coffee&v=20170801&limit=1"),
+                url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Result result = new Gson().fromJson(response, Result.class);
-                        Log.i("Result", result.toString());
+                        Result result = gson.fromJson(response, Result.class);
+                        callback.onResponse(result);
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.e("Error", error.getMessage());
+                        callback.onErrorResponse(error);
                     }
                 });
 
         requestQueue.add(request);
     }
 
-    private String setupDeveloperKey(String url) {
+    private String setupURL(String url) {
         return String.format(
-                "%s?client_id=%s&client_secret=%s",
+                "%s?client_id=%s&client_secret=%s&v=%s",
                 url,
                 client_id,
-                client_secret);
+                client_secret,
+                version);
+    }
+
+    private String applyParameter(String parameter, String value) {
+        if (value != null && !value.trim().equals("")) {
+            return String.format("&%s=%s", parameter, value);
+        }
+
+        return "";
     }
 }

@@ -23,13 +23,13 @@ public class HereNow {
         this.summary = summary;
     }
 
-    private ArrayList<String> groups;
+    protected ArrayList<CheckInGroup> groups;
 
-    public ArrayList<String> getGroups() {
+    public ArrayList<CheckInGroup> getGroups() {
         return this.groups;
     }
 
-    public void setGroups(ArrayList<String> groups) {
+    public void setGroups(ArrayList<CheckInGroup> groups) {
         this.groups = groups;
     }
 }

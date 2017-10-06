@@ -173,7 +173,7 @@ public class Venue {
         this.venuePage = venuePage;
     }
 
-    private HereNow hereNow;
+    protected HereNow hereNow;
 
     public HereNow getHereNow() {
         return this.hereNow;
