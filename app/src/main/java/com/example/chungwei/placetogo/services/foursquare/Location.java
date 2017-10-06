@@ -1,8 +1,9 @@
 package com.example.chungwei.placetogo.services.foursquare;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Location {
+public class Location implements Serializable {
     private String address;
 
     public String getAddress() {

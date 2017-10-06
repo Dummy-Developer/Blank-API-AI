@@ -1,6 +1,8 @@
 package com.example.chungwei.placetogo.services.foursquare;
 
-public class SuggestedBounds {
+import java.io.Serializable;
+
+public class SuggestedBounds implements Serializable {
     private Ne ne;
 
     public Ne getNe() {

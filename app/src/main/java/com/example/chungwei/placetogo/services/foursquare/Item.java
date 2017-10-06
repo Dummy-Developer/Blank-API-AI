@@ -1,8 +1,9 @@
 package com.example.chungwei.placetogo.services.foursquare;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Item {
+public class Item implements Serializable {
     private Reasons reasons;
 
     public Reasons getReasons() {

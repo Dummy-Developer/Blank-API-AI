@@ -1,6 +1,8 @@
 package com.example.chungwei.placetogo.services.foursquare;
 
-public class Result {
+import java.io.Serializable;
+
+public class Result implements Serializable {
     private Meta meta;
 
     public Meta getMeta() {

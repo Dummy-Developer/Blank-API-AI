@@ -1,6 +1,8 @@
 package com.example.chungwei.placetogo.services.foursquare;
 
-public class Category {
+import java.io.Serializable;
+
+public class Category implements Serializable {
     private String id;
 
     public String getId() {

@@ -1,6 +1,8 @@
 package com.example.chungwei.placetogo.services.foursquare;
 
-public class Photo2 {
+import java.io.Serializable;
+
+public class Photo2 implements Serializable {
     private String prefix;
 
     public String getPrefix() {

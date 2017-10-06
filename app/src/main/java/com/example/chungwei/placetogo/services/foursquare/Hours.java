@@ -1,6 +1,8 @@
 package com.example.chungwei.placetogo.services.foursquare;
 
-public class Hours {
+import java.io.Serializable;
+
+public class Hours implements Serializable {
     private String status;
 
     public String getStatus() {

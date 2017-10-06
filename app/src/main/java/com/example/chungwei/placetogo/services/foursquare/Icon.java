@@ -1,6 +1,8 @@
 package com.example.chungwei.placetogo.services.foursquare;
 
-public class Icon {
+import java.io.Serializable;
+
+public class Icon implements Serializable {
     private String prefix;
 
     public String getPrefix() {

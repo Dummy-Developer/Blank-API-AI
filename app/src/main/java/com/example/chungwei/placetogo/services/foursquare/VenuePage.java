@@ -1,6 +1,8 @@
 package com.example.chungwei.placetogo.services.foursquare;
 
-public class VenuePage {
+import java.io.Serializable;
+
+public class VenuePage implements Serializable {
     private String id;
 
     public String getId() {

@@ -1,8 +1,9 @@
 package com.example.chungwei.placetogo.services.foursquare;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Response {
+public class Response implements Serializable {
     private SuggestedFilters suggestedFilters;
 
     public SuggestedFilters getSuggestedFilters() {

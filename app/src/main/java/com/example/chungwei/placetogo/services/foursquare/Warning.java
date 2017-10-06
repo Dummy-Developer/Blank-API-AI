@@ -1,6 +1,8 @@
 package com.example.chungwei.placetogo.services.foursquare;
 
-public class Warning {
+import java.io.Serializable;
+
+public class Warning implements Serializable {
     private String text;
 
     public String getText() {

@@ -1,6 +1,8 @@
 package com.example.chungwei.placetogo.services.foursquare;
 
-public class Source {
+import java.io.Serializable;
+
+public class Source implements Serializable {
     private String name;
 
     public String getName() {

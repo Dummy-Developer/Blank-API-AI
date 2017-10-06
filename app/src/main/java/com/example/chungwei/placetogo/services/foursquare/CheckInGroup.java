@@ -1,8 +1,9 @@
 package com.example.chungwei.placetogo.services.foursquare;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class CheckInGroup {
+public class CheckInGroup implements Serializable {
     private String type;
 
     public String getType() {

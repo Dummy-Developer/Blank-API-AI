@@ -1,6 +1,8 @@
 package com.example.chungwei.placetogo.services.foursquare;
 
-public class Ne {
+import java.io.Serializable;
+
+public class Ne implements Serializable {
     private double lat;
 
     public double getLat() {

@@ -1,6 +1,8 @@
 package com.example.chungwei.placetogo.services.foursquare;
 
-public class BeenHere {
+import java.io.Serializable;
+
+public class BeenHere implements Serializable {
     private int count;
 
     public int getCount() {

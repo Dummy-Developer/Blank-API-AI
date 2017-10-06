@@ -1,6 +1,8 @@
 package com.example.chungwei.placetogo.services.foursquare;
 
-public class Stats {
+import java.io.Serializable;
+
+public class Stats implements Serializable {
     private int checkinsCount;
 
     public int getCheckinsCount() {

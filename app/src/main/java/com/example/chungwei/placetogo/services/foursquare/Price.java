@@ -1,6 +1,8 @@
 package com.example.chungwei.placetogo.services.foursquare;
 
-public class Price {
+import java.io.Serializable;
+
+public class Price implements Serializable {
     private int tier;
 
     public int getTier() {

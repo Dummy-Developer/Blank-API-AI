@@ -1,8 +1,9 @@
 package com.example.chungwei.placetogo.services.foursquare;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class RichStatus {
+public class RichStatus implements Serializable {
     private ArrayList<String> entities;
 
     public ArrayList<String> getEntities() {

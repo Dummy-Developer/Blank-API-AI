@@ -1,6 +1,8 @@
 package com.example.chungwei.placetogo.services.foursquare;
 
-public class Todo {
+import java.io.Serializable;
+
+public class Todo implements Serializable {
     private int count;
 
     public int getCount() {

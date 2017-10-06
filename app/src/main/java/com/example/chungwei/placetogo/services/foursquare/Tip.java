@@ -1,6 +1,8 @@
 package com.example.chungwei.placetogo.services.foursquare;
 
-public class Tip {
+import java.io.Serializable;
+
+public class Tip implements Serializable {
     private String id;
 
     public String getId() {
