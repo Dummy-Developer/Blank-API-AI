@@ -1,6 +1,8 @@
 package com.example.chungwei.placetogo.services.foursquare;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -23,13 +25,13 @@ public class FoursquareService {
 
     private Gson gson;
 
-    public FoursquareService(Context context) {
+    public FoursquareService(@NonNull Context context) {
         this.context = context;
         requestQueue = Volley.newRequestQueue(context);
         gson = new GsonBuilder().excludeFieldsWithModifiers(Modifier.PROTECTED).create();
     }
 
-    public void getVenueRecommendation(final IFoursquareResponse<Result> callback, String ll, String query, int limit) {
+    public void getVenueRecommendation(@NonNull final IFoursquareResponse<Result> callback, @Nullable String ll, @Nullable String query, @NonNull int limit) {
         String url = setupURL("https://api.foursquare.com/v2/venues/explore") +
                 applyParameter("ll", ll) +
                 applyParameter("near", ll == null ? "Penang, Malaysia" : "") +
@@ -56,7 +58,7 @@ public class FoursquareService {
         requestQueue.add(request);
     }
 
-    private String setupURL(String url) {
+    private String setupURL(@NonNull String url) {
         return String.format(
                 "%s?client_id=%s&client_secret=%s&v=%s",
                 url,
@@ -65,7 +67,7 @@ public class FoursquareService {
                 version);
     }
 
-    private String applyParameter(String parameter, String value) {
+    private String applyParameter(@NonNull String parameter, @Nullable String value) {
         if (value != null && !value.trim().equals("")) {
             return String.format("&%s=%s", parameter, value);
         }

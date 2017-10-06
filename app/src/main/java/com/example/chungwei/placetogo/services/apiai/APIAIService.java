@@ -1,6 +1,7 @@
 package com.example.chungwei.placetogo.services.apiai;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import ai.api.AIListener;
 import ai.api.AIServiceException;
@@ -15,7 +16,7 @@ public class APIAIService {
     private AIDataService aiDataService;
     private AIService aiService;
 
-    public APIAIService(Context context, AIListener listener) {
+    public APIAIService(@NonNull Context context, @NonNull AIListener listener) {
         final AIConfiguration config = new AIConfiguration("PLEASE_REPLACE_WITH_ACCESS_TOKEN",
                 AIConfiguration.SupportedLanguages.English,
                 AIConfiguration.RecognitionEngine.System);
@@ -39,7 +40,7 @@ public class APIAIService {
     }
 
     // Text input
-    public AIResponse textRequest(String query) throws AIServiceException {
+    public AIResponse textRequest(@NonNull String query) throws AIServiceException {
         AIRequest request = new AIRequest();
         request.setQuery(query);
         return aiDataService.request(request);
