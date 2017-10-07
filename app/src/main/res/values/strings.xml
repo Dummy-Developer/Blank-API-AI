@@ -11,5 +11,14 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+    <string name="addRemoveWishlistText">ADD/REMOVE WISHLIST</string>
+    <string name="navigateMeText">NAVIGATE ME</string>
+    <string name="appSettingText">APP SETTINGS</string>
+    <string name="userSettingText">USER SETTINGS</string>
+    <string name="viewHistory">VISIT HISTORY</string>
+    <string name="wishlistLeftText">WISHLIST LEFT :</string>
+    <string name="placesVisitedText">PLACE VISITED :</string>
+    <string name="toolsText">TOOLS</string>
+    <string name="visitedPlaceText">VISITED PLACE</string>
 
 </resources>
