@@ -20,7 +20,6 @@
         android:elevation="2dp"
         android:ems="10"
         android:hint="What's in your mind?"
-        android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -37,4 +36,22 @@
         app:layout_constraintRight_toRightOf="@+id/search_editText"
         app:layout_constraintTop_toTopOf="@+id/search_editText"
         app:srcCompat="@drawable/cube" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:shadowColor="#8c8c8c"
+        android:shadowRadius="20"
+        android:text="@string/app_name"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@android:color/white"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/search_editText"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.681" />
 </android.support.constraint.ConstraintLayout>
