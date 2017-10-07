@@ -17,6 +17,7 @@
         android:layout_marginRight="40dp"
         android:layout_marginStart="18dp"
         android:background="@drawable/rounded_corner_edit_text"
+        android:elevation="2dp"
         android:ems="10"
         android:hint="What's in your mind?"
         android:inputType="textPersonName"
