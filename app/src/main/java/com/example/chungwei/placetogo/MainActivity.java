@@ -1,121 +1,110 @@
 package com.example.chungwei.placetogo;
 
-import android.content.Intent;
-import android.os.AsyncTask;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.View;
-import android.widget.EditText;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.ImageView;
 
-import com.android.volley.VolleyError;
-import com.example.chungwei.placetogo.services.apiai.APIAIService;
-import com.example.chungwei.placetogo.services.foursquare.FoursquareService;
-import com.example.chungwei.placetogo.services.foursquare.IFoursquareResponse;
-import com.example.chungwei.placetogo.services.foursquare.Result;
+import jp.wasabeef.blurry.Blurry;
 
-import ai.api.AIListener;
-import ai.api.AIServiceException;
-import ai.api.model.AIError;
-import ai.api.model.AIResponse;
-
-public class MainActivity extends AppCompatActivity implements AIListener {
-
-    private APIAIService apiaiService;
-    private FoursquareService foursquareService;
+public class MainActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //initialize API.AI service
-        apiaiService = new APIAIService(this, this);
 
-        //initialize Foursquare service
-        foursquareService = new FoursquareService(this);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-        findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String text = ((EditText) findViewById(R.id.editText)).getText().toString();
-                SendRequest(text);
-            }
-        });
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
 
-        findViewById(R.id.fbutton).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View view) {
-                foursquareService.getVenueRecommendation(new IFoursquareResponse<Result>() {
-                    @Override
-                    public void onResponse(Result result) {
-                        Log.i("Result", result.toString());
-
-                        Intent intent = new Intent(view.getContext(), ListActivity.class);
-                        intent.putExtra("result", result.getResponse().getGroups().get(0).getItems());
-                        startActivity(intent);
-                    }
-
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.i("Error", "error");
-                    }
-                }, "5.3654,100.461", "", 10);
-            }
-        });
-    }
-
-
-    private void SendRequest(String text) {
-        AsyncTask<String, Void, AIResponse> task = new AsyncTask<String, Void, AIResponse>() {
-            @Override
-            protected AIResponse doInBackground(String... strings) {
-                try {
-                    return apiaiService.textRequest(strings[0]);
-                } catch (AIServiceException e) {
-                    //handle error
-                    return null;
-                }
-            }
-
-            @Override
-            protected void onPostExecute(AIResponse aiResponse) {
-                //get the result here
-
-                Log.i("API.AI Result", aiResponse.getResult().getAction());
-            }
-        };
-
-        task.execute(text);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
     }
 
     @Override
-    public void onResult(AIResponse result) {
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
 
+        ImageView background_imageView = (ImageView) findViewById(R.id.background_imageView);
+
+        Blurry.with(this)
+                .radius(25)
+                .sampling(2)
+                .color(Color.argb(0, 0, 0, 0))
+                .animate(5000)
+                .capture(background_imageView)
+                .into(background_imageView);
     }
 
     @Override
-    public void onError(AIError error) {
-
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
     }
 
     @Override
-    public void onAudioLevel(float level) {
-
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
     }
 
     @Override
-    public void onListeningStarted() {
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
 
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
+    @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public void onListeningCanceled() {
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
 
-    }
+        if (id == R.id.nav_camera) {
+            // Handle the camera action
+        } else if (id == R.id.nav_gallery) {
 
-    @Override
-    public void onListeningFinished() {
+        } else if (id == R.id.nav_slideshow) {
 
+        } else if (id == R.id.nav_manage) {
+
+        } else if (id == R.id.nav_share) {
+
+        } else if (id == R.id.nav_send) {
+
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 }
