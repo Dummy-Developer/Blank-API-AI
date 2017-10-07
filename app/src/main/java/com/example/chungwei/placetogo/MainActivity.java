@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.addremove) {
-            // Handle the camera action
+            // Handle the camera actio
         } else if (id == R.id.navigateme) {
 
         } else if (id == R.id.placevisited) {
