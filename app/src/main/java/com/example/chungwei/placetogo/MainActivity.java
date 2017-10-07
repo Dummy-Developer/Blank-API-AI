@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 
 import jp.wasabeef.blurry.Blurry;
@@ -22,6 +23,21 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        final ImageView background_imageView = (ImageView) findViewById(R.id.background_imageView);
+        background_imageView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                Blurry.with(getBaseContext())
+                        .radius(25)
+                        .sampling(2)
+                        .color(Color.argb(0, 0, 0, 0))
+                        .animate(1000)
+                        .capture(background_imageView)
+                        .into(background_imageView);
+
+                background_imageView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+            }
+        });
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -34,21 +50,6 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-    }
-
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-
-        ImageView background_imageView = (ImageView) findViewById(R.id.background_imageView);
-
-        Blurry.with(this)
-                .radius(25)
-                .sampling(2)
-                .color(Color.argb(0, 0, 0, 0))
-                .animate(5000)
-                .capture(background_imageView)
-                .into(background_imageView);
     }
 
     @Override
